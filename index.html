@@ -1,0 +1,1077 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Mapping MX Mems</title>
+<meta name="description" content="Middlesex alumni memories, pinned to the spot on campus where they happened.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 40'%3E%3Cpath d='M15 38.5C15 38.5 2.5 24 2.5 14.5A12.5 12.5 0 1 1 27.5 14.5C27.5 24 15 38.5 15 38.5Z' fill='%23B5162B' stroke='%23fff' stroke-width='2'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a map table on the left and a tray of memory cards on the right; the two stack on a phone. */
+:root{
+  --paper:#F6F3F1; --paper-2:#FFFFFF; --paper-3:#ECE6E2;
+  --ink:#1C1715; --ink-2:#6B615D;
+  --line:#E3DBD7; --line-2:#CDC2BC;
+  --red:#B5162B; --red-ink:#FFFFFF; --red-soft:#F8E4E6;
+  --pin-ring:#FFFFFF; --shadow:rgba(28,23,21,.18);
+  --ok:#2F7D4F; --warn:#8A5A00;
+  --f-display:"Fraunces",Georgia,"Times New Roman",serif;
+  --f-ui:"IBM Plex Sans","Helvetica Neue",Arial,sans-serif;
+  --f-mono:"IBM Plex Mono","SFMono-Regular",Menlo,Consolas,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#17120F; --paper-2:#211A17; --paper-3:#2A2220;
+    --ink:#F1ECE8; --ink-2:#B3A8A2;
+    --line:#3A2F2B; --line-2:#4E403B;
+    --red:#E65262; --red-ink:#1A0D0F; --red-soft:#3E1C21;
+    --pin-ring:#211A17; --shadow:rgba(0,0,0,.55);
+    --ok:#6CC08B; --warn:#E0B355;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#17120F; --paper-2:#211A17; --paper-3:#2A2220;
+  --ink:#F1ECE8; --ink-2:#B3A8A2;
+  --line:#3A2F2B; --line-2:#4E403B;
+  --red:#E65262; --red-ink:#1A0D0F; --red-soft:#3E1C21;
+  --pin-ring:#211A17; --shadow:rgba(0,0,0,.55);
+  --ok:#6CC08B; --warn:#E0B355;
+  color-scheme:dark;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-ui);font-size:15px;line-height:1.45;-webkit-font-smoothing:antialiased}
+img{max-width:100%}
+[hidden]{display:none!important}
+h1,h2,h3,p{margin:0}
+h1,h2,h3{text-wrap:balance}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+
+.app{display:flex;flex-direction:column;min-height:100%;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:env(safe-area-inset-top,0px) env(safe-area-inset-bottom,0px)}
+@media (min-width:760px){.app{height:100%}}
+
+/* Header */
+.top{display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px;padding-block:14px 12px;border-bottom:1px solid var(--line)}
+.brand{min-width:0;flex:1 1 260px}
+.wordmark{font-family:var(--f-display);font-size:27px;font-weight:600;letter-spacing:-.012em;line-height:1.05;font-variation-settings:"opsz" 96}
+.sub{color:var(--ink-2);font-size:13px;margin-top:3px}
+.facts{display:flex;flex-wrap:wrap;gap:6px}
+.facts span{font-family:var(--f-mono);font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-2);border:1px solid var(--line);border-radius:999px;padding:5px 10px;background:var(--paper-2)}
+@media (max-width:759px){.facts{display:none}}
+.actions{display:flex;gap:8px;margin-left:auto;align-items:center}
+@media (max-width:759px){.actions{margin-left:0;width:100%}.actions .btn.primary{flex:1;justify-content:center}}
+
+/* Buttons */
+.btn{appearance:none;font-weight:500;border-radius:10px;padding:9px 14px;border:1px solid var(--line-2);background:var(--paper-2);color:var(--ink);cursor:pointer;display:inline-flex;align-items:center;gap:8px;line-height:1.2;white-space:nowrap;text-decoration:none}
+.btn.primary{background:var(--red);border-color:var(--red);color:var(--red-ink)}
+.btn.ghost{background:transparent}
+.btn.danger{color:var(--red)}
+.btn.small{padding:6px 10px;font-size:13px;border-radius:8px}
+.btn:disabled{opacity:.55;cursor:default}
+.icon-btn{appearance:none;border:1px solid var(--line);background:var(--paper-2);width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:20px;line-height:1;display:grid;place-items:center;color:var(--ink-2)}
+.link{appearance:none;border:0;background:none;padding:0;color:var(--ink-2);font-size:12.5px;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+
+/* Work area */
+.work{flex:1;min-height:0;display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:16px;padding-block:14px 16px}
+@media (max-width:1023px){.work{grid-template-columns:minmax(0,1fr) 320px}}
+@media (max-width:759px){
+  .work{grid-template-columns:minmax(0,1fr);grid-template-rows:auto auto}
+  .map-wrap{height:min(58vh,520px);min-height:320px}
+}
+.map-wrap{position:relative;border:1px solid var(--line);border-radius:14px;overflow:hidden;min-height:0;background:radial-gradient(var(--line) 1px,transparent 1px) 0 0/18px 18px,var(--paper-3)}
+#map{position:absolute;inset:0;touch-action:none;user-select:none;-webkit-user-select:none;cursor:grab;outline:none}
+#map:focus-visible{outline:2px solid var(--red);outline-offset:-2px}
+#map.place{cursor:crosshair}
+#map.dragging{cursor:grabbing}
+#stage{position:absolute;left:0;top:0;transform-origin:0 0;will-change:transform;box-shadow:0 10px 30px var(--shadow)}
+#stage img{display:block;width:100%;height:100%;pointer-events:none;-webkit-user-drag:none;user-select:none;background:var(--paper-2)}
+.pins{position:absolute;inset:0}
+.spots{position:absolute;inset:0;pointer-events:none}
+.spot{position:absolute;width:34px;height:34px;border-radius:50%;transform:translate(-50%,-50%);pointer-events:auto;cursor:pointer}
+.spot.flash{box-shadow:0 0 0 3px var(--paper-2),0 0 0 7px var(--red);animation:spotflash 2s ease-out forwards}
+@keyframes spotflash{0%,70%{opacity:1}100%{opacity:0}}
+@media (prefers-reduced-motion:reduce){.spot.flash{animation:none}}
+
+/* Pins */
+.pin{position:absolute;width:30px;height:40px;padding:0;border:0;background:transparent;cursor:pointer;transform:translate(-50%,-100%) scale(var(--inv,1));transform-origin:50% 100%;-webkit-tap-highlight-color:transparent;transition:transform .12s ease}
+.pin svg{position:absolute;inset:0;width:30px;height:40px;overflow:visible}
+.pin-body{fill:var(--red);stroke:var(--pin-ring);stroke-width:2}
+.pin-photo{position:absolute;left:6px;top:5.5px;width:18px;height:18px;border-radius:50%;background:var(--paper-2) center/cover no-repeat}
+.pin:hover,.pin.sel{transform:translate(-50%,-100%) scale(calc(var(--inv,1)*1.18));z-index:5}
+.pin.sel .pin-body{stroke:var(--ink);stroke-width:2.5}
+.pin.pending .pin-body{fill:var(--warn)}
+.pin.hid{opacity:.5}
+.pin.stale .pin-body{stroke-dasharray:3 2}
+.pin.draft{z-index:6;cursor:default}
+.pin.draft .pin-body{fill:var(--ink)}
+.pin.draft::after{content:"";position:absolute;left:3px;top:2px;width:24px;height:24px;border-radius:50%;border:2px solid var(--red);animation:pulse 1.4s ease-out infinite}
+@keyframes pulse{from{transform:scale(1);opacity:.9}to{transform:scale(2.4);opacity:0}}
+@media (prefers-reduced-motion:reduce){.pin{transition:none}.pin.draft::after{animation:none;opacity:.8}}
+
+/* Map overlays */
+.zoom{position:absolute;right:12px;top:12px;display:flex;flex-direction:column;gap:6px;z-index:3}
+.zoom button{width:36px;height:36px;border-radius:10px;border:1px solid var(--line-2);background:var(--paper-2);color:var(--ink);font-size:19px;cursor:pointer;box-shadow:0 2px 6px var(--shadow);display:grid;place-items:center;padding:0}
+.zoom button svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round}
+.map-foot{position:absolute;left:12px;bottom:12px;z-index:3;font-family:var(--f-mono);font-size:11.5px;color:var(--ink-2);background:var(--paper-2);border:1px solid var(--line);border-radius:8px;padding:6px 10px;max-width:calc(100% - 70px);line-height:1.4}
+.map-foot b{color:var(--ink);font-weight:500}
+.banner{position:absolute;left:50%;top:12px;transform:translateX(-50%);z-index:4;display:flex;align-items:center;gap:12px;background:var(--ink);color:var(--paper);border-radius:999px;padding:8px 8px 8px 16px;box-shadow:0 6px 18px var(--shadow);max-width:calc(100% - 24px);font-weight:500}
+.banner .btn{background:var(--paper);color:var(--ink);border-color:transparent}
+.map-empty{position:absolute;inset:0;z-index:2;display:grid;place-items:center;padding:24px;pointer-events:none}
+.map-empty .card-box{pointer-events:auto;max-width:380px;background:var(--paper-2);border:1px solid var(--line);border-radius:14px;padding:20px 22px;box-shadow:0 8px 24px var(--shadow);display:grid;gap:10px}
+.map-empty h3{font-family:var(--f-display);font-size:20px;font-weight:600;line-height:1.2}
+.map-empty p{color:var(--ink-2);font-size:14px}
+
+/* Tray */
+.tray{display:flex;flex-direction:column;min-height:0;border:1px solid var(--line);border-radius:14px;background:var(--paper-2);overflow:hidden}
+.tray-head{padding:12px 14px;border-bottom:1px solid var(--line);display:grid;gap:8px}
+.search{width:100%;font:inherit;padding:9px 12px;border-radius:10px;border:1px solid var(--line-2);background:var(--paper);color:var(--ink)}
+.count{font-family:var(--f-mono);font-size:11.5px;color:var(--ink-2);text-transform:uppercase;letter-spacing:.05em}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{appearance:none;border:1px solid var(--line-2);background:var(--paper);border-radius:999px;padding:4px 10px;font-size:12.5px;cursor:pointer;color:var(--ink-2)}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.list{overflow:auto;min-height:0;flex:1}
+@media (max-width:759px){.list{overflow:visible;flex:none}}
+.card{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;padding:12px 14px;border:0;border-bottom:1px solid var(--line);cursor:pointer;text-align:left;width:100%;background:transparent;color:inherit;align-items:start}
+.card:hover{background:var(--paper)}
+.card.sel{background:var(--red-soft)}
+.card .t{font-family:var(--f-display);font-size:17px;font-weight:600;line-height:1.2}
+.card .pl{font-family:var(--f-mono);font-size:11px;color:var(--ink-2);text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px}
+.card .x{color:var(--ink-2);font-size:13px;margin-top:4px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;line-height:1.4}
+.card .by{font-family:var(--f-mono);font-size:11.5px;color:var(--ink-2);margin-top:7px}
+.card img{width:64px;height:64px;border-radius:8px;object-fit:cover;border:1px solid var(--line);background:var(--paper-3)}
+.card .flag{display:inline-block;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--warn);margin-left:6px}
+.list-empty{padding:28px 18px;display:grid;gap:8px;color:var(--ink-2);font-size:14px}
+.list-empty h3{font-family:var(--f-display);font-size:19px;font-weight:600;color:var(--ink)}
+.skel{padding:12px 14px;border-bottom:1px solid var(--line);display:grid;grid-template-columns:1fr 64px;gap:12px}
+.skel i{display:block;background:var(--paper-3);border-radius:6px;height:12px;margin-bottom:8px}
+.skel i:first-child{width:70%;height:16px}
+.skel i:last-child{width:40%}
+.skel b{display:block;width:64px;height:64px;border-radius:8px;background:var(--paper-3)}
+.tray-foot{padding:8px 14px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:12.5px;color:var(--ink-2)}
+
+/* Sheets */
+.backdrop{position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:40}
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:50;background:var(--paper-2);color:var(--ink);border-top:1px solid var(--line);border-radius:18px 18px 0 0;max-height:92%;overflow:auto;padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px));padding-block:16px calc(18px + env(safe-area-inset-bottom,0px));box-shadow:0 -10px 40px var(--shadow)}
+@media (min-width:760px){
+  .sheet{left:50%;top:50%;bottom:auto;right:auto;transform:translate(-50%,-50%);width:min(600px,calc(100% - 32px));max-height:calc(100% - 48px);border-radius:16px;border:1px solid var(--line);padding:20px 24px 22px}
+}
+.sheet-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:14px}
+.sheet-title{font-family:var(--f-display);font-size:24px;font-weight:600;line-height:1.15}
+.eyebrow{font-family:var(--f-mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2);margin-bottom:4px}
+form{display:grid;gap:14px}
+.field{display:grid;gap:6px}
+.field label{font-weight:500;font-size:14px;display:flex;justify-content:space-between;gap:8px;align-items:baseline}
+.opt{font-weight:400;color:var(--ink-2);font-size:12px}
+.counter{font-family:var(--f-mono);font-size:11px;color:var(--ink-2);font-weight:400;font-variant-numeric:tabular-nums}
+.field input:not([type="file"]),.field textarea{width:100%;font:inherit;padding:9px 12px;border-radius:10px;border:1px solid var(--line-2);background:var(--paper);color:var(--ink)}
+.field textarea{resize:vertical;min-height:120px;line-height:1.5;font-family:var(--f-display);font-size:16px}
+.field input[type="file"]{font-size:13px;color:var(--ink-2)}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:479px){.row2{grid-template-columns:1fr}}
+.hint{font-size:12.5px;color:var(--ink-2)}
+.photo-row{display:grid;gap:10px}
+.photo-preview{display:flex;align-items:center;gap:12px}
+.photo-preview img{width:88px;height:88px;object-fit:cover;border-radius:10px;border:1px solid var(--line)}
+.form-error{color:var(--red);font-size:14px;background:var(--red-soft);border-radius:10px;padding:10px 12px}
+.form-ok{color:var(--ok);font-size:14px}
+.sheet-actions{display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap;margin-top:4px}
+.hp{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
+
+/* Detail */
+.d-photo{width:100%;max-height:360px;object-fit:cover;border-radius:12px;border:1px solid var(--line);background:var(--paper-3);display:block}
+.d-cap{font-size:13px;color:var(--ink-2);margin-top:6px}
+.d-title{font-family:var(--f-display);font-size:26px;font-weight:600;line-height:1.15;margin-top:14px}
+.d-story{font-family:var(--f-display);font-size:17px;line-height:1.55;margin-top:12px;white-space:pre-wrap;max-width:62ch}
+.d-by{font-family:var(--f-mono);font-size:12.5px;color:var(--ink-2);margin-top:14px;line-height:1.5}
+.d-note{margin-top:12px;padding:10px 12px;border-radius:10px;background:var(--paper);border:1px dashed var(--line-2);font-size:13.5px;color:var(--ink-2)}
+.d-note.warn{color:var(--warn)}
+.d-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px;padding-top:14px;border-top:1px solid var(--line);align-items:center}
+.d-actions .spacer{flex:1}
+.confirm{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:14px}
+
+/* Moderator sheet */
+.mod-grid{display:grid;gap:14px}
+.mod-card{border:1px solid var(--line);border-radius:12px;padding:14px;display:grid;gap:8px}
+.mod-card h3{font-family:var(--f-display);font-size:18px;font-weight:600}
+.mod-card p{font-size:13.5px;color:var(--ink-2)}
+.mod-card .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.status{font-family:var(--f-mono);font-size:12px;color:var(--ink-2)}
+.status.err{color:var(--red)}
+
+/* Toast */
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:60;background:var(--ink);color:var(--paper);padding:10px 16px;border-radius:999px;font-weight:500;box-shadow:0 8px 24px var(--shadow);max-width:calc(100% - 32px);text-align:center}
+</style>
+</head>
+<body>
+
+<div class="app">
+  <header class="top">
+    <div class="brand">
+      <h1 class="wordmark" id="site-name">Mapping MX Mems</h1>
+      <p class="sub" id="site-tagline">Middlesex alumni memories, pinned to the spot on campus where they happened</p>
+    </div>
+    <div class="facts" aria-label="About the campus">
+      <span>Concord, Massachusetts</span><span>Founded 1901</span><span>Built around the Circle</span>
+    </div>
+    <div class="actions">
+      <button class="btn ghost" id="btn-mod" type="button">Moderators</button>
+      <button class="btn primary" id="btn-add" type="button">Add a memory</button>
+    </div>
+  </header>
+
+  <div class="work">
+    <section class="map-wrap" aria-label="Campus map">
+      <div id="map" tabindex="0" aria-label="Campus map. Drag to move. Scroll, pinch or use plus and minus to zoom. Arrow keys move the map.">
+        <div id="stage" hidden>
+          <img id="mapimg" alt="Illustrated map of the Middlesex School campus" draggable="false">
+          <div class="spots" id="spots"></div>
+          <div class="pins" id="pins"></div>
+        </div>
+      </div>
+      <div class="map-empty" id="map-empty" hidden></div>
+      <div class="banner" id="banner" hidden>
+        <span id="banner-text">Tap the spot on campus where it happened</span>
+        <button class="btn small" id="banner-cancel" type="button">Cancel</button>
+      </div>
+      <div class="zoom" aria-label="Zoom">
+        <button id="z-in" type="button" aria-label="Zoom in">+</button>
+        <button id="z-out" type="button" aria-label="Zoom out">&minus;</button>
+        <button id="z-fit" type="button" aria-label="Fit the whole map in view"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 6V2h4M10 2h4v4M14 10v4h-4M6 14H2v-4"/></svg></button>
+      </div>
+      <div class="map-foot" id="map-foot"></div>
+    </section>
+
+    <aside class="tray" aria-label="Memories">
+      <div class="tray-head">
+        <input class="search" id="q" type="search" placeholder="Search titles, stories, names, class years" aria-label="Search memories" autocomplete="off">
+        <select class="search" id="jump" aria-label="Jump to a place on the map" hidden><option value="">Jump to a place on the map…</option></select>
+        <div class="chips" id="chips" hidden></div>
+        <div class="count" id="count">Memories</div>
+      </div>
+      <div class="list" id="list"></div>
+      <div class="tray-foot"><span id="mod-state">New memories appear once a moderator approves them.</span></div>
+    </aside>
+  </div>
+</div>
+
+<div class="backdrop" id="backdrop" hidden></div>
+
+<section class="sheet" id="sheet-form" role="dialog" aria-modal="true" aria-labelledby="form-title" hidden>
+  <div class="sheet-head">
+    <div>
+      <p class="eyebrow" id="form-eyebrow">Middlesex School · new memory</p>
+      <h2 class="sheet-title" id="form-title">Add a memory</h2>
+    </div>
+    <button class="icon-btn" id="form-close" type="button" aria-label="Close">&times;</button>
+  </div>
+  <form id="form" novalidate>
+    <div class="field">
+      <label for="f-place">Where on campus <span class="opt">optional</span></label>
+      <input id="f-place" maxlength="60" placeholder="The Circle, the Chapel steps, Ware Hall, your dorm room" autocomplete="off">
+    </div>
+    <div class="field">
+      <label for="f-title">Title</label>
+      <input id="f-title" maxlength="80" required placeholder="A few words for the moment" autocomplete="off">
+    </div>
+    <div class="field">
+      <label for="f-story">What happened here <span class="counter" id="story-count">0 / 1200</span></label>
+      <textarea id="f-story" rows="6" maxlength="1200" required placeholder="Tell it the way you'd tell a classmate."></textarea>
+    </div>
+    <div class="row2">
+      <div class="field">
+        <label for="f-name">Your name</label>
+        <input id="f-name" maxlength="60" required autocomplete="name" placeholder="As classmates would know you">
+      </div>
+      <div class="field">
+        <label for="f-year">Class year <span class="opt">optional</span></label>
+        <input id="f-year" inputmode="numeric" maxlength="4" placeholder="1998" autocomplete="off">
+      </div>
+    </div>
+    <div class="field" id="photo-field">
+      <label for="f-photo">Photo <span class="opt">optional</span></label>
+      <div class="photo-row">
+        <input id="f-photo" type="file" accept="image/*">
+        <div class="photo-preview" id="photo-preview" hidden>
+          <img id="photo-img" alt="">
+          <button type="button" class="btn small" id="photo-remove">Remove photo</button>
+        </div>
+      </div>
+      <p class="hint">JPG, PNG or WebP. Big photos are resized before they upload.</p>
+    </div>
+    <div class="field" id="caption-field" hidden>
+      <label for="f-caption">Photo caption <span class="opt">optional</span></label>
+      <input id="f-caption" maxlength="140" placeholder="Who is in it, and roughly when" autocomplete="off">
+    </div>
+    <div class="hp" aria-hidden="true"><label for="f-website">Leave this empty</label><input id="f-website" name="website" tabindex="-1" autocomplete="off"></div>
+    <p class="hint">Memories go live after a moderator reads them, usually within a few days.</p>
+    <p class="form-error" id="form-error" role="alert" hidden></p>
+    <div class="sheet-actions">
+      <button type="button" class="btn" id="form-cancel">Cancel</button>
+      <button type="submit" class="btn primary" id="form-submit">Send this memory</button>
+    </div>
+  </form>
+</section>
+
+<section class="sheet" id="sheet-detail" role="dialog" aria-modal="true" aria-labelledby="d-title" hidden>
+  <div class="sheet-head">
+    <p class="eyebrow" id="d-eyebrow"></p>
+    <button class="icon-btn" id="detail-close" type="button" aria-label="Close">&times;</button>
+  </div>
+  <div id="detail-body"></div>
+</section>
+
+<section class="sheet" id="sheet-mod" role="dialog" aria-modal="true" aria-labelledby="mod-title" hidden>
+  <div class="sheet-head">
+    <div>
+      <p class="eyebrow">Moderators</p>
+      <h2 class="sheet-title" id="mod-title">Moderator sign-in</h2>
+    </div>
+    <button class="icon-btn" id="mod-close" type="button" aria-label="Close">&times;</button>
+  </div>
+  <div id="mod-body" class="mod-grid"></div>
+</section>
+
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+<script src="config.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  const $ = (s) => document.querySelector(s);
+  const el = (tag, attrs, kids) => {
+    const e = document.createElement(tag);
+    if (attrs) for (const k of Object.keys(attrs)) {
+      const v = attrs[k];
+      if (v == null || v === false) continue;
+      if (k === 'class') e.className = v;
+      else if (k === 'text') e.textContent = v;
+      else if (k === 'style') e.style.cssText = v;
+      else if (k.slice(0, 2) === 'on') e.addEventListener(k.slice(2), v);
+      else e.setAttribute(k, v === true ? '' : v);
+    }
+    for (const c of (kids || [])) if (c != null) e.appendChild(typeof c === 'string' ? document.createTextNode(c) : c);
+    return e;
+  };
+
+  const CFG = window.MX_CONFIG || {};
+  const SITE = CFG.site || {};
+  const LIMITS = { title: 80, story: 1200, name: 60, place: 60, caption: 140 };
+  const IMG_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
+  const MAX_UPLOAD = 9.5 * 1024 * 1024;
+  const SESSION_KEY = 'mxmems.session';
+  const STATUS_LABEL = { approved: 'Live', pending: 'Pending', hidden: 'Hidden' };
+
+  const MAP = (function () {
+    const m = CFG.map; if (!m || typeof m !== 'object' || typeof m.src !== 'string') return null;
+    const legend = [];
+    if (Array.isArray(m.legend)) for (const e of m.legend.slice(0, 200)) {
+      if (!e || typeof e !== 'object' || typeof e.name !== 'string') continue;
+      const x = Number(e.x), y = Number(e.y); if (!isFinite(x) || !isFinite(y)) continue;
+      legend.push({ k: e.k == null ? '' : String(e.k).slice(0, 4), name: e.name.slice(0, 80), x: Math.min(1, Math.max(0, x)), y: Math.min(1, Math.max(0, y)) });
+    }
+    return { src: m.src, w: Number(m.w) > 0 ? Number(m.w) : 0, h: Number(m.h) > 0 ? Number(m.h) : 0, version: typeof m.version === 'string' ? m.version : '', credit: typeof m.credit === 'string' ? m.credit : '', legend };
+  })();
+  const CONFIGURED = typeof CFG.supabaseUrl === 'string' && /^https:\/\/[a-z0-9-]+\.supabase\.co\/?$/i.test(CFG.supabaseUrl) && typeof CFG.supabaseAnonKey === 'string' && CFG.supabaseAnonKey.length > 40 && CFG.supabaseAnonKey.indexOf('YOUR-') < 0;
+
+  const S = {
+    mode: 'browse', draft: null, selected: null, q: '', filter: 'approved',
+    memories: [], loaded: false, loadError: null,
+    auth: { token: null, refresh: null, email: '', isModerator: false, checking: false },
+    view: null, busy: false, pendingFile: null, previewUrl: null, openSheet: null, lastFocus: null, mapReady: false
+  };
+
+  const map = $('#map'), stage = $('#stage'), mapImg = $('#mapimg'), pinsLayer = $('#pins');
+
+  /* ---------- helpers ---------- */
+  const str = (v, max) => (typeof v === 'string' ? v.slice(0, max) : '');
+  const num = (v) => (typeof v === 'number' && isFinite(v) ? v : null);
+  const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+  const uuid = () => {
+    if (window.crypto && crypto.randomUUID) return crypto.randomUUID();
+    const a = new Uint8Array(16); crypto.getRandomValues(a); a[6] = (a[6] & 0x0f) | 0x40; a[8] = (a[8] & 0x3f) | 0x80;
+    const h = Array.from(a, (b) => b.toString(16).padStart(2, '0')).join('');
+    return h.slice(0, 8) + '-' + h.slice(8, 12) + '-' + h.slice(12, 16) + '-' + h.slice(16, 20) + '-' + h.slice(20);
+  };
+  const yearShort = (y) => (/^\d{4}$/.test(y) ? '’' + y.slice(2) : y);
+  const fmtDate = (iso) => {
+    const d = new Date(iso); if (isNaN(d)) return '';
+    try { return d.toLocaleDateString(undefined, { month: 'short', year: 'numeric' }); } catch (e) { return ''; }
+  };
+  let toastTimer = null;
+  const toast = (msg, ms) => {
+    const t = $('#toast'); t.textContent = msg; t.hidden = false;
+    clearTimeout(toastTimer); toastTimer = setTimeout(() => { t.hidden = true; }, ms || 3200);
+  };
+  const photoUrl = (path) => CFG.supabaseUrl.replace(/\/$/, '') + '/storage/v1/object/public/memories/' + path.split('/').map(encodeURIComponent).join('/');
+  const isStale = (m) => !!(MAP && MAP.version && m.map_version && m.map_version !== MAP.version);
+  const isMod = () => S.auth.isModerator;
+  const canSee = (m) => m.status === 'approved' || isMod();
+  const visible = () => S.memories.filter((m) => canSee(m) && (!isMod() || S.filter === 'all' || m.status === S.filter));
+  const byId = (id) => S.memories.find((m) => m.id === id) || null;
+
+  /* ---------- Supabase REST ---------- */
+  const base = () => (CFG.supabaseUrl || '').replace(/\/$/, '');
+  function headers(extra) {
+    const h = { apikey: CFG.supabaseAnonKey, Authorization: 'Bearer ' + (S.auth.token || CFG.supabaseAnonKey) };
+    return Object.assign(h, extra || {});
+  }
+  async function apiError(res) {
+    let msg = res.statusText || ('HTTP ' + res.status);
+    try { const j = await res.json(); msg = j.message || j.error_description || j.error || j.msg || msg; } catch (e) { /* no body */ }
+    return { code: 'http', status: res.status, message: String(msg) };
+  }
+  async function rest(path, opts, retried) {
+    const o = opts || {};
+    let res;
+    try {
+      res = await fetch(base() + '/rest/v1/' + path, { method: o.method || 'GET', headers: headers(Object.assign({ 'Content-Type': 'application/json' }, o.headers || {})), body: o.body == null ? undefined : JSON.stringify(o.body) });
+    } catch (e) { throw { code: 'network', message: 'network' }; }
+    if (res.status === 401 && S.auth.refresh && !retried) { if (await refreshSession()) return rest(path, opts, true); }
+    if (!res.ok) throw await apiError(res);
+    if (res.status === 204 || o.minimal) return null;
+    return res.json();
+  }
+  async function uploadPhoto(blob, path) {
+    let res;
+    try {
+      res = await fetch(base() + '/storage/v1/object/memories/' + path, { method: 'POST', headers: headers({ 'Content-Type': blob.type, 'x-upsert': 'false' }), body: blob });
+    } catch (e) { throw { code: 'network', message: 'network' }; }
+    if (!res.ok) throw await apiError(res);
+    return path;
+  }
+  async function deletePhoto(path) {
+    const res = await fetch(base() + '/storage/v1/object/memories', { method: 'DELETE', headers: headers({ 'Content-Type': 'application/json' }), body: JSON.stringify({ prefixes: [path] }) });
+    if (!res.ok) throw await apiError(res);
+  }
+
+  /* ---------- auth (moderators) ---------- */
+  function saveSession() { try { sessionStorage.setItem(SESSION_KEY, JSON.stringify({ token: S.auth.token, refresh: S.auth.refresh })); } catch (e) { /* ignore */ } }
+  function clearSession() { S.auth = { token: null, refresh: null, email: '', isModerator: false, checking: false }; try { sessionStorage.removeItem(SESSION_KEY); } catch (e) { /* ignore */ } }
+  function readSession() {
+    try { const j = JSON.parse(sessionStorage.getItem(SESSION_KEY) || 'null'); if (j && j.token) { S.auth.token = j.token; S.auth.refresh = j.refresh || null; return true; } } catch (e) { /* ignore */ }
+    return false;
+  }
+  function takeTokensFromHash() {
+    const h = location.hash || '';
+    if (h.indexOf('access_token=') < 0) return false;
+    const p = new URLSearchParams(h.slice(1));
+    const token = p.get('access_token'); if (!token) return false;
+    S.auth.token = token; S.auth.refresh = p.get('refresh_token');
+    saveSession();
+    try { history.replaceState(null, '', location.pathname + location.search); } catch (e) { location.hash = ''; }
+    return true;
+  }
+  async function refreshSession() {
+    try {
+      const res = await fetch(base() + '/auth/v1/token?grant_type=refresh_token', { method: 'POST', headers: { apikey: CFG.supabaseAnonKey, 'Content-Type': 'application/json' }, body: JSON.stringify({ refresh_token: S.auth.refresh }) });
+      if (!res.ok) { clearSession(); return false; }
+      const j = await res.json(); S.auth.token = j.access_token; S.auth.refresh = j.refresh_token || S.auth.refresh; saveSession(); return true;
+    } catch (e) { return false; }
+  }
+  async function resolveSession() {
+    if (!S.auth.token) return;
+    S.auth.checking = true; renderModState();
+    try {
+      let res = await fetch(base() + '/auth/v1/user', { headers: headers() });
+      if (res.status === 401 && S.auth.refresh && await refreshSession()) res = await fetch(base() + '/auth/v1/user', { headers: headers() });
+      if (!res.ok) { clearSession(); return; }
+      const u = await res.json(); S.auth.email = str(u.email, 200);
+      const mod = await rest('rpc/is_moderator', { method: 'POST', body: {} });
+      S.auth.isModerator = mod === true;
+      if (S.auth.isModerator) { S.filter = 'pending'; }
+    } catch (e) { S.auth.isModerator = false; }
+    finally { S.auth.checking = false; renderModState(); }
+  }
+  async function sendMagicLink(email) {
+    const redirect = location.origin + location.pathname;
+    const res = await fetch(base() + '/auth/v1/otp?redirect_to=' + encodeURIComponent(redirect), { method: 'POST', headers: { apikey: CFG.supabaseAnonKey, 'Content-Type': 'application/json' }, body: JSON.stringify({ email, create_user: true }) });
+    if (!res.ok) throw await apiError(res);
+  }
+  async function signOut() {
+    try { await fetch(base() + '/auth/v1/logout', { method: 'POST', headers: headers() }); } catch (e) { /* ignore */ }
+    clearSession(); S.filter = 'approved';
+    await loadMemories(); renderAll(); renderMod();
+  }
+
+  /* ---------- data ---------- */
+  function sanitizeMemory(r) {
+    if (!r || typeof r !== 'object') return null;
+    const id = str(r.id, 64); if (!id) return null;
+    const x = num(r.x), y = num(r.y); if (x == null || y == null) return null;
+    const status = ['approved', 'pending', 'hidden'].indexOf(r.status) >= 0 ? r.status : 'pending';
+    return {
+      id, status, x: clamp(x, 0, 1), y: clamp(y, 0, 1),
+      title: str(r.title, LIMITS.title), story: str(r.story, LIMITS.story), name: str(r.name, LIMITS.name),
+      place: str(r.place, LIMITS.place), classYear: str(r.class_year, 4), caption: str(r.caption, LIMITS.caption),
+      photo: (typeof r.photo_path === 'string' && /^photos\/[A-Za-z0-9._-]{1,120}$/.test(r.photo_path)) ? r.photo_path : null,
+      createdAt: str(r.created_at, 40), map_version: str(r.map_version, 80)
+    };
+  }
+  async function loadMemories() {
+    if (!CONFIGURED) { S.loaded = true; S.loadError = 'config'; return; }
+    try {
+      const sel = 'id,created_at,status,x,y,place,title,story,name,class_year,photo_path,caption,map_version';
+      const filter = isMod() ? '' : '&status=eq.approved';
+      const rows = await rest('memories?select=' + sel + filter + '&order=created_at.desc&limit=2000');
+      S.memories = (Array.isArray(rows) ? rows : []).map(sanitizeMemory).filter(Boolean);
+      S.loaded = true; S.loadError = null;
+    } catch (err) { S.loaded = true; S.loadError = err; }
+  }
+  async function refresh() { await loadMemories(); renderList(); renderPins(); renderFoot(); renderChips(); if (S.selected && S.openSheet === 'detail') { const m = byId(S.selected); if (m && canSee(m)) openDetail(m); else closeSheet(); } }
+
+  /* ---------- map view ---------- */
+  function fit() {
+    if (!MAP || !S.mapReady) return;
+    const cw = map.clientWidth, ch = map.clientHeight; if (!cw || !ch) return;
+    const z = Math.min(cw / MAP.w, ch / MAP.h) * 0.96;
+    S.view = { z, tx: (cw - MAP.w * z) / 2, ty: (ch - MAP.h * z) / 2, fitZ: z };
+    applyView();
+  }
+  function applyView() {
+    const v = S.view; if (!v) return;
+    stage.style.transform = 'translate(' + v.tx + 'px,' + v.ty + 'px) scale(' + v.z + ')';
+    stage.style.setProperty('--inv', String(1 / v.z));
+  }
+  const clampZ = (z, v) => clamp(z, v.fitZ * 0.6, Math.max(v.fitZ * 12, 4));
+  function clampPan(v) {
+    const cw = map.clientWidth, ch = map.clientHeight;
+    v.tx = clamp(v.tx, cw * 0.25 - MAP.w * v.z, cw * 0.75);
+    v.ty = clamp(v.ty, ch * 0.25 - MAP.h * v.z, ch * 0.75);
+  }
+  function zoomAt(f, px, py) {
+    const v = S.view; if (!v) return;
+    const z = clampZ(v.z * f, v);
+    const sx = (px - v.tx) / v.z, sy = (py - v.ty) / v.z;
+    v.z = z; v.tx = px - sx * z; v.ty = py - sy * z;
+    clampPan(v); applyView();
+  }
+  function centerOn(pt, minZoomFactor) {
+    const v = S.view; if (!v) return;
+    if (v.z < v.fitZ * (minZoomFactor || 1.6)) v.z = clampZ(v.fitZ * ((minZoomFactor || 1.6) + 0.4), v);
+    v.tx = map.clientWidth / 2 - pt.x * MAP.w * v.z; v.ty = map.clientHeight / 2 - pt.y * MAP.h * v.z;
+    clampPan(v); applyView();
+  }
+
+  const ptrs = new Map(); let gesture = null;
+  const dist = (a, b) => Math.hypot(a.x - b.x, a.y - b.y);
+  const mid = (a, b) => ({ x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 });
+  function onDown(e) {
+    if (e.pointerType === 'mouse' && e.button !== 0) return;
+    ptrs.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    if (ptrs.size === 1) {
+      gesture = { moved: 0, downTarget: e.target, lastX: e.clientX, lastY: e.clientY, pinch: null };
+      window.addEventListener('pointermove', onMove);
+      window.addEventListener('pointerup', onUp);
+      window.addEventListener('pointercancel', onUp);
+    } else if (ptrs.size === 2 && gesture) {
+      const [a, b] = [...ptrs.values()]; const v = S.view;
+      if (v) gesture.pinch = { dist: dist(a, b) || 1, z: v.z, tx: v.tx, ty: v.ty, mid: mid(a, b) };
+      gesture.moved = 99;
+    }
+  }
+  function onMove(e) {
+    if (!gesture || !ptrs.has(e.pointerId)) return;
+    ptrs.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    const v = S.view; if (!v) return;
+    if (ptrs.size >= 2 && gesture.pinch) {
+      const [a, b] = [...ptrs.values()]; const p = gesture.pinch;
+      const d = dist(a, b) || 1, m = mid(a, b), r = map.getBoundingClientRect();
+      const z = clampZ(p.z * d / p.dist, v);
+      const sx = (p.mid.x - r.left - p.tx) / p.z, sy = (p.mid.y - r.top - p.ty) / p.z;
+      v.z = z; v.tx = (m.x - r.left) - sx * z; v.ty = (m.y - r.top) - sy * z;
+      clampPan(v); applyView();
+    } else if (ptrs.size === 1) {
+      const dx = e.clientX - gesture.lastX, dy = e.clientY - gesture.lastY;
+      gesture.lastX = e.clientX; gesture.lastY = e.clientY; gesture.moved += Math.abs(dx) + Math.abs(dy);
+      if (gesture.moved > 8) map.classList.add('dragging');
+      v.tx += dx; v.ty += dy; clampPan(v); applyView();
+    }
+  }
+  function onUp(e) {
+    if (!gesture) return;
+    const wasTap = gesture.moved < 8 && ptrs.size === 1 && e.type === 'pointerup';
+    ptrs.delete(e.pointerId);
+    if (ptrs.size === 0) {
+      window.removeEventListener('pointermove', onMove);
+      window.removeEventListener('pointerup', onUp);
+      window.removeEventListener('pointercancel', onUp);
+      map.classList.remove('dragging');
+      const t = gesture.downTarget; gesture = null;
+      if (wasTap) onTap(e, t);
+    } else if (ptrs.size === 1) {
+      gesture.pinch = null; const [a] = [...ptrs.values()]; gesture.lastX = a.x; gesture.lastY = a.y; gesture.moved = 99;
+    }
+  }
+  function onTap(e, target) {
+    const pinEl = target && target.closest ? target.closest('.pin') : null;
+    if (pinEl && !pinEl.classList.contains('draft')) { select(pinEl.dataset.id); return; }
+    if (S.mode === 'place') { placeAt(e.clientX, e.clientY); return; }
+    const spot = target && target.closest ? target.closest('.spot') : null;
+    if (spot) { const entry = MAP.legend.find((x) => (x.k || x.name) === spot.dataset.k); if (entry) jumpTo(entry); return; }
+    if (S.openSheet === 'detail') closeSheet();
+  }
+  function placeAt(cx, cy) {
+    const r = stage.getBoundingClientRect();
+    const x = (cx - r.left) / r.width, y = (cy - r.top) / r.height;
+    if (x < 0 || x > 1 || y < 0 || y > 1) { toast('Tap on the map itself.'); return; }
+    S.draft = { x, y };
+    renderPins();
+    openForm();
+    const near = nearestPlace(x, y);
+    if (near && !F.place.value) F.place.value = near.name;
+  }
+  function nearestPlace(x, y) {
+    let best = null, bestD = 60;
+    for (const e of MAP.legend) { const d = Math.hypot((e.x - x) * MAP.w, (e.y - y) * MAP.h); if (d < bestD) { bestD = d; best = e; } }
+    return best;
+  }
+  function flashSpot(e) {
+    for (const s of document.querySelectorAll('.spot.flash')) s.classList.remove('flash');
+    const s = document.querySelector('.spot[data-k="' + CSS.escape(e.k || e.name) + '"]');
+    if (s) { s.classList.add('flash'); setTimeout(() => s.classList.remove('flash'), 2200); }
+  }
+  function jumpTo(e) {
+    centerOn(e, 1.8); flashSpot(e);
+    const n = S.memories.filter((m) => canSee(m) && m.place && m.place.toLowerCase() === e.name.toLowerCase()).length;
+    toast((e.k ? e.k + ' · ' : '') + e.name + (n ? ' · ' + n + (n === 1 ? ' memory' : ' memories') : ''));
+  }
+  map.addEventListener('pointerdown', onDown);
+  map.addEventListener('wheel', (e) => {
+    if (!S.view) return; e.preventDefault();
+    const r = map.getBoundingClientRect();
+    zoomAt(Math.exp(-e.deltaY * 0.0015), e.clientX - r.left, e.clientY - r.top);
+  }, { passive: false });
+  map.addEventListener('keydown', (e) => {
+    const v = S.view; if (!v) return;
+    const step = 60; let used = true;
+    if (e.key === 'ArrowLeft') v.tx += step; else if (e.key === 'ArrowRight') v.tx -= step;
+    else if (e.key === 'ArrowUp') v.ty += step; else if (e.key === 'ArrowDown') v.ty -= step;
+    else if (e.key === '+' || e.key === '=') zoomAt(1.4, map.clientWidth / 2, map.clientHeight / 2);
+    else if (e.key === '-' || e.key === '_') zoomAt(1 / 1.4, map.clientWidth / 2, map.clientHeight / 2);
+    else if (e.key === '0') fit();
+    else used = false;
+    if (used) { e.preventDefault(); clampPan(v); applyView(); }
+  });
+  $('#z-in').addEventListener('click', () => zoomAt(1.4, map.clientWidth / 2, map.clientHeight / 2));
+  $('#z-out').addEventListener('click', () => zoomAt(1 / 1.4, map.clientWidth / 2, map.clientHeight / 2));
+  $('#z-fit').addEventListener('click', fit);
+  if (window.ResizeObserver) new ResizeObserver(() => { if (map.clientWidth && map.clientHeight) fit(); }).observe(map);
+
+  /* ---------- rendering ---------- */
+  function renderAll() { renderMap(); renderList(); renderFoot(); renderChips(); renderModState(); }
+  function renderMap() {
+    if (MAP && S.mapReady) { stage.style.width = MAP.w + 'px'; stage.style.height = MAP.h + 'px'; stage.hidden = false; if (!S.view) fit(); else applyView(); }
+    else stage.hidden = true;
+    map.classList.toggle('place', S.mode === 'place');
+    $('#banner').hidden = S.mode !== 'place';
+    renderMapEmpty(); renderSpots(); renderPins();
+  }
+  function renderMapEmpty() {
+    const box = $('#map-empty'); box.replaceChildren();
+    if (MAP && S.mapReady) { box.hidden = true; return; }
+    box.hidden = false;
+    const h = MAP ? (S.mapReady === false && S.mapFailed ? 'The campus map didn’t load' : 'Opening the campus map') : 'No campus map configured';
+    const p = MAP ? (S.mapFailed ? 'Check that ' + MAP.src + ' is in the site folder next to index.html.' : 'One moment.') : 'Add the map image to config.js (the map section) and reload.';
+    box.appendChild(el('div', { class: 'card-box' }, [el('p', { class: 'eyebrow', text: 'Middlesex School · Concord, Massachusetts' }), el('h3', { text: h }), el('p', { text: p })]));
+  }
+  function renderSpots() {
+    const legend = MAP ? MAP.legend : [];
+    if ($('#spots').dataset.done === '1') return;
+    $('#spots').dataset.done = '1';
+    const frag = document.createDocumentFragment();
+    for (const e of legend) frag.appendChild(el('div', { class: 'spot', 'data-k': e.k || e.name, title: (e.k ? e.k + ' · ' : '') + e.name, style: 'left:' + (e.x * 100) + '%;top:' + (e.y * 100) + '%' }));
+    $('#spots').replaceChildren(frag);
+    const sel = $('#jump');
+    const opts = [el('option', { value: '', text: 'Jump to a place on the map…' })];
+    legend.forEach((e, i) => opts.push(el('option', { value: String(i), text: (e.k ? e.k + ' · ' : '') + e.name })));
+    sel.replaceChildren(...opts);
+    sel.hidden = !legend.length;
+  }
+  $('#jump').addEventListener('change', () => { const i = parseInt($('#jump').value, 10); $('#jump').value = ''; if (MAP && MAP.legend[i]) jumpTo(MAP.legend[i]); });
+
+  const PIN_SVG = '<svg viewBox="0 0 30 40" aria-hidden="true"><path class="pin-body" d="M15 38.5C15 38.5 2.5 24 2.5 14.5A12.5 12.5 0 1 1 27.5 14.5C27.5 24 15 38.5 15 38.5Z"/></svg>';
+  function pinEl(m) {
+    const b = el('button', {
+      class: 'pin' + (S.selected === m.id ? ' sel' : '') + (m.status === 'hidden' ? ' hid' : '') + (m.status === 'pending' ? ' pending' : '') + (isStale(m) ? ' stale' : ''),
+      type: 'button', 'data-id': m.id,
+      'aria-label': (m.title || 'Memory') + (m.name ? ' — ' + m.name : '') + (m.status !== 'approved' ? ' (' + STATUS_LABEL[m.status].toLowerCase() + ')' : ''),
+      style: 'left:' + (m.x * 100) + '%;top:' + (m.y * 100) + '%',
+      onclick: (e) => { if (e.detail === 0) select(m.id); }
+    });
+    b.innerHTML = PIN_SVG;
+    if (m.photo) b.appendChild(el('span', { class: 'pin-photo', style: 'background-image:url("' + photoUrl(m.photo) + '")' }));
+    return b;
+  }
+  function renderPins() {
+    const frag = document.createDocumentFragment();
+    if (MAP && S.mapReady) {
+      for (const m of visible()) frag.appendChild(pinEl(m));
+      if (S.draft) { const d = el('div', { class: 'pin draft', style: 'left:' + (S.draft.x * 100) + '%;top:' + (S.draft.y * 100) + '%', 'aria-hidden': 'true' }); d.innerHTML = PIN_SVG; frag.appendChild(d); }
+    }
+    pinsLayer.replaceChildren(frag);
+  }
+  function renderFoot() {
+    const f = $('#map-foot'); f.replaceChildren();
+    const n = S.loaded && !S.loadError ? S.memories.filter((m) => m.status === 'approved').length : null;
+    f.appendChild(el('b', { text: n == null ? 'Middlesex School' : n + (n === 1 ? ' memory' : ' memories') + ' · Middlesex School' }));
+    const foot = typeof SITE.footer === 'string' ? SITE.footer.replace(/^Middlesex School\s*·\s*/, '') : '';
+    if (foot) f.appendChild(document.createTextNode(' · ' + foot));
+    if (MAP && MAP.credit) f.appendChild(document.createTextNode(' · ' + MAP.credit));
+  }
+  function renderChips() {
+    const c = $('#chips'); c.hidden = !isMod(); if (!isMod()) return;
+    const counts = { pending: 0, approved: 0, hidden: 0 };
+    for (const m of S.memories) counts[m.status] = (counts[m.status] || 0) + 1;
+    c.replaceChildren(...['pending', 'approved', 'hidden', 'all'].map((k) => el('button', { class: 'chip', type: 'button', 'aria-pressed': String(S.filter === k), onclick: () => { S.filter = k; renderList(); renderPins(); renderChips(); } }, [(k === 'all' ? 'All' : STATUS_LABEL[k]) + (k === 'all' ? '' : ' ' + counts[k])])));
+  }
+  function renderModState() {
+    const s = $('#mod-state');
+    if (S.auth.checking) s.textContent = 'Checking your sign-in…';
+    else if (isMod()) s.textContent = 'Moderating as ' + S.auth.email + '. Pending memories show first.';
+    else if (S.auth.token) s.textContent = 'Signed in as ' + (S.auth.email || 'a reader') + ', not a moderator.';
+    else s.textContent = 'New memories appear once a moderator approves them.';
+    $('#btn-mod').textContent = isMod() ? 'Moderating' : 'Moderators';
+  }
+  function matches(m, q) {
+    if (!q) return true;
+    return [m.title, m.story, m.name, m.place, m.classYear].join(' ').toLowerCase().indexOf(q) >= 0;
+  }
+  function renderList() {
+    const list = $('#list'); list.replaceChildren();
+    const q = S.q.trim().toLowerCase();
+    if (!S.loaded) {
+      $('#count').textContent = 'Loading memories';
+      for (let i = 0; i < 3; i++) list.appendChild(el('div', { class: 'skel', 'aria-hidden': 'true' }, [el('div', null, [el('i'), el('i'), el('i')]), el('b')]));
+      return;
+    }
+    if (S.loadError === 'config') {
+      $('#count').textContent = 'Not connected';
+      list.appendChild(el('div', { class: 'list-empty' }, [el('h3', { text: 'Not connected to the database yet' }), el('p', { text: 'Put your Supabase project URL and anon key in config.js, then reload. The README walks through it.' })]));
+      return;
+    }
+    if (S.loadError) {
+      $('#count').textContent = 'Memories';
+      list.appendChild(el('div', { class: 'list-empty' }, [el('h3', { text: 'Memories didn’t load' }), el('p', { text: humanize(S.loadError) }), el('div', null, [el('button', { class: 'btn small', type: 'button', onclick: refresh }, ['Try again'])])]));
+      return;
+    }
+    const all = visible(); const shown = all.filter((m) => matches(m, q));
+    const label = isMod() && S.filter !== 'all' ? STATUS_LABEL[S.filter].toLowerCase() + ' ' : '';
+    $('#count').textContent = (q ? shown.length + ' of ' + all.length : all.length) + ' ' + label + (all.length === 1 && !q ? 'memory' : 'memories');
+    if (!all.length) {
+      const kids = isMod() && S.filter === 'pending'
+        ? [el('h3', { text: 'Nothing waiting for review' }), el('p', { text: 'New submissions land here. Use the chips above to see live or hidden memories.' })]
+        : [el('h3', { text: 'No memories on the map yet' }), el('p', { text: 'Be the first: tap Add a memory, then tap the spot on the map where it happened.' })];
+      list.appendChild(el('div', { class: 'list-empty' }, kids)); return;
+    }
+    if (!shown.length) { list.appendChild(el('div', { class: 'list-empty' }, [el('h3', { text: 'Nothing matches' }), el('p', { text: 'Try another word, a name, or a class year.' })])); return; }
+    for (const m of shown) {
+      const left = el('div', { style: 'min-width:0' }, [
+        m.place ? el('div', { class: 'pl', text: m.place }) : null,
+        el('div', { class: 't' }, [m.title || 'Untitled', m.status !== 'approved' ? el('span', { class: 'flag', text: STATUS_LABEL[m.status] }) : null, isStale(m) ? el('span', { class: 'flag', text: 'old map' }) : null]),
+        el('div', { class: 'x', text: m.story }),
+        el('div', { class: 'by', text: (m.name || 'Anonymous') + (m.classYear ? ' ' + yearShort(m.classYear) : '') + (m.createdAt ? ' · ' + fmtDate(m.createdAt) : '') })
+      ]);
+      const card = el('button', { class: 'card' + (S.selected === m.id ? ' sel' : ''), type: 'button', 'data-id': m.id, onclick: () => select(m.id, true) }, [left]);
+      if (m.photo) card.appendChild(el('img', { src: photoUrl(m.photo), alt: m.caption || '', loading: 'lazy' }));
+      list.appendChild(card);
+    }
+  }
+
+  /* ---------- selection and detail ---------- */
+  function select(id, fromList) {
+    const m = byId(id); if (!m) return;
+    S.selected = id;
+    renderPins(); renderList();
+    if (fromList) centerOn(m);
+    openDetail(m);
+    const card = document.querySelector('.card[data-id="' + CSS.escape(id) + '"]');
+    if (card && !fromList && card.scrollIntoView) try { card.scrollIntoView({ block: 'nearest' }); } catch (e) { /* ignore */ }
+  }
+  function openDetail(m) {
+    const body = $('#detail-body'); body.replaceChildren();
+    $('#d-eyebrow').textContent = 'Middlesex School' + (m.place ? ' · ' + m.place : '');
+    if (m.photo) {
+      body.appendChild(el('img', { class: 'd-photo', src: photoUrl(m.photo), alt: m.caption || (m.title + ' photo') }));
+      if (m.caption) body.appendChild(el('p', { class: 'd-cap', text: m.caption }));
+    }
+    body.appendChild(el('h2', { class: 'd-title', id: 'd-title', text: m.title || 'Untitled' }));
+    body.appendChild(el('p', { class: 'd-story', text: m.story }));
+    body.appendChild(el('p', { class: 'd-by', text: '— ' + (m.name || 'Anonymous') + (m.classYear ? ', Class of ' + m.classYear : '') + (m.createdAt ? ' · added ' + fmtDate(m.createdAt) : '') }));
+    if (m.status === 'pending') body.appendChild(el('p', { class: 'd-note warn', text: 'Waiting for review. Only moderators can see it.' }));
+    if (m.status === 'hidden') body.appendChild(el('p', { class: 'd-note warn', text: 'Hidden from the public map.' }));
+    if (isStale(m)) body.appendChild(el('p', { class: 'd-note', text: 'This pin was placed on an earlier version of the campus map, so its spot may be a little off.' }));
+    if (isMod()) {
+      const actions = el('div', { class: 'd-actions' });
+      if (m.status !== 'approved') actions.appendChild(el('button', { class: 'btn small primary', type: 'button', onclick: () => moderate(m, 'approved') }, ['Approve']));
+      if (m.status !== 'hidden') actions.appendChild(el('button', { class: 'btn small', type: 'button', onclick: () => moderate(m, 'hidden') }, ['Hide']));
+      actions.appendChild(el('span', { class: 'spacer' }));
+      actions.appendChild(deleteControl(m));
+      body.appendChild(actions);
+    }
+    showSheet('detail');
+  }
+  function deleteControl(m) {
+    const wrap = el('span', { class: 'confirm' });
+    const ask = el('button', { class: 'btn small danger', type: 'button' }, ['Delete']);
+    ask.addEventListener('click', () => {
+      wrap.replaceChildren(
+        el('span', { text: 'Delete this memory for good?' }),
+        el('button', { class: 'btn small danger', type: 'button', onclick: () => removeMemory(m) }, ['Yes, delete']),
+        el('button', { class: 'btn small', type: 'button', onclick: () => wrap.replaceChildren(ask) }, ['Keep it'])
+      );
+    });
+    wrap.appendChild(ask);
+    return wrap;
+  }
+  async function moderate(m, status) {
+    try {
+      await rest('memories?id=eq.' + encodeURIComponent(m.id), { method: 'PATCH', body: { status }, headers: { Prefer: 'return=minimal' }, minimal: true });
+      toast(status === 'approved' ? 'Approved. It’s on the map.' : 'Hidden.');
+      closeSheet(); await refresh();
+    } catch (err) { toast(humanize(err)); }
+  }
+  async function removeMemory(m) {
+    try {
+      await rest('memories?id=eq.' + encodeURIComponent(m.id), { method: 'DELETE', headers: { Prefer: 'return=minimal' }, minimal: true });
+      if (m.photo) { try { await deletePhoto(m.photo); } catch (e) { /* already gone */ } }
+      toast('Deleted.');
+      closeSheet(); await refresh();
+    } catch (err) { toast(humanize(err)); }
+  }
+
+  /* ---------- sheets ---------- */
+  function showSheet(name) {
+    if (S.openSheet !== name) S.lastFocus = document.activeElement;
+    for (const n of ['form', 'detail', 'mod']) $('#sheet-' + n).hidden = n !== name;
+    $('#backdrop').hidden = false; S.openSheet = name;
+    const sheet = $('#sheet-' + name);
+    const first = sheet.querySelector('input:not([type="file"]):not([tabindex="-1"]), textarea, button');
+    if (name === 'form') F.place.focus(); else if (first) first.focus();
+  }
+  function closeSheet() {
+    if (!S.openSheet) return;
+    const was = S.openSheet;
+    for (const n of ['form', 'detail', 'mod']) $('#sheet-' + n).hidden = true;
+    $('#backdrop').hidden = true; S.openSheet = null;
+    if (was === 'form') { clearPhoto(); if (S.mode !== 'place') { S.draft = null; renderPins(); } }
+    if (was === 'detail') { S.selected = null; renderPins(); renderList(); }
+    if (S.lastFocus && S.lastFocus.focus) try { S.lastFocus.focus(); } catch (e) { /* ignore */ }
+    S.lastFocus = null;
+  }
+  $('#backdrop').addEventListener('click', closeSheet);
+  $('#form-close').addEventListener('click', closeSheet);
+  $('#form-cancel').addEventListener('click', closeSheet);
+  $('#detail-close').addEventListener('click', closeSheet);
+  $('#mod-close').addEventListener('click', closeSheet);
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape') return;
+    if (S.openSheet) { closeSheet(); if (S.mode === 'place') exitPlace(); }
+    else if (S.mode === 'place') exitPlace();
+  });
+
+  /* ---------- add flow ---------- */
+  function enterPlace() {
+    S.mode = 'place'; S.draft = null; S.selected = null;
+    if (S.openSheet) closeSheet();
+    renderMap(); renderList();
+    map.focus({ preventScroll: true });
+  }
+  function exitPlace() { S.mode = 'browse'; S.draft = null; renderMap(); }
+  $('#banner-cancel').addEventListener('click', exitPlace);
+  $('#btn-add').addEventListener('click', () => {
+    if (!MAP || !S.mapReady) { toast('The campus map is still loading.'); return; }
+    if (!CONFIGURED) { toast('The site isn’t connected to its database yet (see config.js).'); return; }
+    enterPlace();
+  });
+
+  /* ---------- form ---------- */
+  const F = { place: $('#f-place'), title: $('#f-title'), story: $('#f-story'), name: $('#f-name'), year: $('#f-year'), photo: $('#f-photo'), caption: $('#f-caption'), website: $('#f-website') };
+  F.story.addEventListener('input', () => { $('#story-count').textContent = F.story.value.length + ' / ' + LIMITS.story; });
+  F.year.addEventListener('input', () => { F.year.value = F.year.value.replace(/\D/g, '').slice(0, 4); });
+  function openForm() {
+    clearPhoto();
+    F.place.value = ''; F.title.value = ''; F.story.value = ''; F.caption.value = ''; F.website.value = '';
+    try { F.name.value = F.name.value || localStorage.getItem('mxmems.name') || ''; F.year.value = F.year.value || localStorage.getItem('mxmems.year') || ''; } catch (e) { /* ignore */ }
+    $('#story-count').textContent = '0 / ' + LIMITS.story;
+    $('#form-error').hidden = true;
+    showSheet('form');
+  }
+  function showPreview(url) {
+    if (S.previewUrl) { try { URL.revokeObjectURL(S.previewUrl); } catch (e) { /* ignore */ } }
+    S.previewUrl = url;
+    $('#photo-img').src = url; $('#photo-preview').hidden = false; $('#caption-field').hidden = false;
+  }
+  function clearPhoto() {
+    S.pendingFile = null;
+    if (S.previewUrl) { try { URL.revokeObjectURL(S.previewUrl); } catch (e) { /* ignore */ } S.previewUrl = null; }
+    $('#photo-img').removeAttribute('src'); $('#photo-preview').hidden = true; $('#caption-field').hidden = true;
+    F.photo.value = ''; F.caption.value = '';
+  }
+  F.photo.addEventListener('change', () => {
+    const f = F.photo.files && F.photo.files[0]; if (!f) return;
+    S.pendingFile = f; showPreview(URL.createObjectURL(f));
+  });
+  $('#photo-remove').addEventListener('click', clearPhoto);
+  function formError(msg) { const e = $('#form-error'); e.textContent = msg; e.hidden = false; if (e.scrollIntoView) e.scrollIntoView({ block: 'nearest' }); }
+  function setBusy(on, label) { S.busy = on; const b = $('#form-submit'); b.disabled = on; b.textContent = on ? label : 'Send this memory'; }
+  $('#form').addEventListener('submit', async (e) => {
+    e.preventDefault(); if (S.busy) return;
+    const vals = {
+      place: F.place.value.trim().slice(0, LIMITS.place), title: F.title.value.trim().slice(0, LIMITS.title),
+      story: F.story.value.trim().slice(0, LIMITS.story), name: F.name.value.trim().slice(0, LIMITS.name),
+      class_year: F.year.value.trim(), caption: F.caption.value.trim().slice(0, LIMITS.caption)
+    };
+    if (!vals.title) { formError('Give the memory a title.'); F.title.focus(); return; }
+    if (!vals.story) { formError('Tell the story, even a sentence or two.'); F.story.focus(); return; }
+    if (!vals.name) { formError('Add your name so classmates know who’s remembering.'); F.name.focus(); return; }
+    if (vals.class_year && !/^\d{4}$/.test(vals.class_year)) { formError('Class year should be four digits, like 1998.'); F.year.focus(); return; }
+    if (!S.draft) { formError('Pick the spot on the map first.'); return; }
+    let last = 0; try { last = Number(localStorage.getItem('mxmems.last') || 0); } catch (e) { /* ignore */ }
+    if (Date.now() - last < 20000) { formError('Give it a few seconds between memories.'); return; }
+    $('#form-error').hidden = true;
+    if (F.website.value) { closeSheet(); exitPlace(); toast('Thanks! Your memory is in the queue.'); return; }
+    setBusy(true, 'Sending…');
+    try {
+      let photo_path = null;
+      if (S.pendingFile) {
+        setBusy(true, 'Uploading photo…');
+        const blob = await prepareImage(S.pendingFile, 1600);
+        const ext = blob.type === 'image/png' ? 'png' : blob.type === 'image/webp' ? 'webp' : blob.type === 'image/gif' ? 'gif' : 'jpg';
+        photo_path = await uploadPhoto(blob, 'photos/' + uuid() + '.' + ext);
+      }
+      setBusy(true, 'Sending…');
+      await rest('memories', { method: 'POST', headers: { Prefer: 'return=minimal' }, minimal: true, body: {
+        status: 'pending', x: S.draft.x, y: S.draft.y, place: vals.place, title: vals.title, story: vals.story, name: vals.name,
+        class_year: vals.class_year, caption: photo_path ? vals.caption : '', photo_path, map_version: MAP.version || ''
+      } });
+      try { localStorage.setItem('mxmems.last', String(Date.now())); localStorage.setItem('mxmems.name', vals.name); localStorage.setItem('mxmems.year', vals.class_year); } catch (e) { /* ignore */ }
+      closeSheet(); exitPlace();
+      toast(isMod() ? 'Saved to the queue.' : 'Thanks! Your memory is in the queue and will appear once a moderator approves it.', 6000);
+      if (isMod()) await refresh();
+    } catch (err) { formError(humanize(err)); }
+    finally { setBusy(false); }
+  });
+
+  function humanize(err) {
+    if (!err) return 'Something went wrong.';
+    if (err.code === 'network') return 'Couldn’t reach the server. Check your connection and try again.';
+    if (err.code === 'unsupported_type') return 'That photo format isn’t supported. Use a JPG, PNG or WebP.';
+    if (err.code === 'too_large') return 'That photo is too large. Choose one under 10 MB.';
+    const msg = String(err.message || '');
+    const st = err.status;
+    if (st === 401 || st === 403) return 'You don’t have permission to do that. Moderators can sign in from the Moderators button.';
+    if (st === 404) return 'The database isn’t set up yet: run supabase/setup.sql in the Supabase SQL editor.';
+    if (st === 413 || /exceeded the maximum allowed size|too large/i.test(msg)) return 'That photo is too large. Choose one under 10 MB.';
+    if (st === 429) return 'Too many requests for now. Wait a minute and try again.';
+    if (/row-level security|violates/i.test(msg)) return 'The database refused this entry. Check the access rules in setup.sql.';
+    if (/mime type/i.test(msg)) return 'That file type isn’t allowed. Use a JPG, PNG or WebP.';
+    return 'Couldn’t save' + (msg ? ': ' + msg.slice(0, 140) : '.');
+  }
+
+  /* ---------- images ---------- */
+  async function loadBitmap(file) {
+    try { return await createImageBitmap(file, { imageOrientation: 'from-image' }); } catch (e) { /* try without options */ }
+    try { return await createImageBitmap(file); } catch (e) { /* fall through */ }
+    return new Promise((resolve) => {
+      const url = URL.createObjectURL(file); const im = new Image();
+      im.onload = () => { URL.revokeObjectURL(url); resolve(im); };
+      im.onerror = () => { URL.revokeObjectURL(url); resolve(null); };
+      im.src = url;
+    });
+  }
+  async function prepareImage(file, maxSide) {
+    const bmp = await loadBitmap(file);
+    if (!bmp) { if (IMG_TYPES.indexOf(file.type) >= 0 && file.size <= MAX_UPLOAD) return file; throw { code: 'unsupported_type' }; }
+    const w = bmp.width || bmp.naturalWidth, h = bmp.height || bmp.naturalHeight;
+    const scale = Math.min(1, maxSide / Math.max(w, h));
+    if (scale === 1 && IMG_TYPES.indexOf(file.type) >= 0 && file.size <= MAX_UPLOAD) return file;
+    const c = document.createElement('canvas');
+    c.width = Math.max(1, Math.round(w * scale)); c.height = Math.max(1, Math.round(h * scale));
+    c.getContext('2d').drawImage(bmp, 0, 0, c.width, c.height);
+    const type = file.type === 'image/png' ? 'image/png' : 'image/jpeg';
+    const blob = await new Promise((r) => c.toBlob(r, type, 0.86));
+    if (!blob) throw { code: 'unsupported_type' };
+    if (blob.size > MAX_UPLOAD) throw { code: 'too_large' };
+    return blob;
+  }
+
+  /* ---------- moderator sheet ---------- */
+  function renderMod() {
+    const body = $('#mod-body'); body.replaceChildren();
+    if (!CONFIGURED) { body.appendChild(el('div', { class: 'mod-card' }, [el('h3', { text: 'Not connected yet' }), el('p', { text: 'Add the Supabase URL and anon key to config.js first.' })])); return; }
+    if (S.auth.token) {
+      $('#mod-title').textContent = isMod() ? 'Moderating' : 'Signed in';
+      body.appendChild(el('div', { class: 'mod-card' }, [
+        el('h3', { text: S.auth.email || 'Signed in' }),
+        el('p', { text: isMod() ? 'You can approve, hide and delete memories from each memory’s page. Pending ones are listed first in the tray.' : 'This email isn’t on the moderator list. A moderator can add it in Supabase (the moderators table).' }),
+        el('div', { class: 'row' }, [
+          isMod() ? el('button', { class: 'btn small', type: 'button', onclick: exportCsv }, ['Download all memories (CSV)']) : null,
+          el('button', { class: 'btn small', type: 'button', onclick: signOut }, ['Sign out'])
+        ])
+      ]));
+      return;
+    }
+    $('#mod-title').textContent = 'Moderator sign-in';
+    const email = el('input', { id: 'mod-email', type: 'email', class: 'search', placeholder: 'you@mxschool.edu', autocomplete: 'email', 'aria-label': 'Email address' });
+    const status = el('p', { class: 'status', id: 'mod-status' });
+    const send = el('button', { class: 'btn small primary', type: 'button' }, ['Email me a sign-in link']);
+    send.addEventListener('click', async () => {
+      const v = email.value.trim(); if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v)) { status.textContent = 'Enter the email address on the moderator list.'; status.classList.add('err'); return; }
+      send.disabled = true; status.classList.remove('err'); status.textContent = 'Sending…';
+      try { await sendMagicLink(v); status.textContent = 'Sent. Open the link in that email on this device; it brings you back here signed in.'; }
+      catch (err) { status.textContent = humanize(err); status.classList.add('err'); send.disabled = false; }
+    });
+    body.appendChild(el('div', { class: 'mod-card' }, [
+      el('h3', { text: 'Sign in with an email link' }),
+      el('p', { text: 'For the alumni office and anyone else on the moderator list. Readers and contributors don’t need to sign in.' }),
+      el('div', { class: 'row' }, [el('div', { style: 'flex:1;min-width:200px' }, [email]), send]),
+      status
+    ]));
+  }
+  $('#btn-mod').addEventListener('click', () => { renderMod(); showSheet('mod'); });
+  function exportCsv() {
+    const esc = (v) => '"' + String(v == null ? '' : v).replace(/"/g, '""') + '"';
+    const rows = [['status', 'place', 'title', 'story', 'name', 'class_year', 'photo_url', 'photo_caption', 'x', 'y', 'map_version', 'created_at', 'id'].map(esc).join(',')];
+    for (const m of S.memories) rows.push([m.status, m.place, m.title, m.story, m.name, m.classYear, m.photo ? photoUrl(m.photo) : '', m.caption, m.x.toFixed(4), m.y.toFixed(4), m.map_version, m.createdAt, m.id].map(esc).join(','));
+    const blob = new Blob(['﻿' + rows.join('\r\n')], { type: 'text/csv' });
+    const a = el('a', { href: URL.createObjectURL(blob), download: 'mapping-mx-mems.csv' }); document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+  }
+
+  /* ---------- search ---------- */
+  $('#q').addEventListener('input', () => { S.q = $('#q').value; renderList(); });
+
+  /* ---------- boot ---------- */
+  async function init() {
+    if (typeof SITE.name === 'string' && SITE.name) { $('#site-name').textContent = SITE.name; document.title = SITE.name; }
+    if (typeof SITE.tagline === 'string') $('#site-tagline').textContent = SITE.tagline;
+    if (MAP) {
+      mapImg.addEventListener('load', () => {
+        if (!MAP.w || !MAP.h) { MAP.w = mapImg.naturalWidth; MAP.h = mapImg.naturalHeight; }
+        S.mapReady = true; S.mapFailed = false; renderMap(); renderPins();
+      });
+      mapImg.addEventListener('error', () => { S.mapReady = false; S.mapFailed = true; renderMapEmpty(); });
+      mapImg.src = MAP.src;
+    }
+    renderAll();
+    const fromLink = takeTokensFromHash();
+    if (!fromLink) readSession();
+    if (CONFIGURED && S.auth.token) await resolveSession();
+    await loadMemories();
+    renderAll();
+    if (fromLink) { renderMod(); showSheet('mod'); }
+    document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible' && S.loaded && !S.loadError) refresh(); });
+    setInterval(() => { if (document.visibilityState === 'visible' && S.loaded && !S.loadError && !S.openSheet) refresh(); }, 120000);
+  }
+  init();
+})();
+</script>
+</body>
+</html>
