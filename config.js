@@ -4,8 +4,8 @@
 window.MX_CONFIG = {
   // 1) From Supabase: Project Settings → API → "Project URL" and the "anon public" key.
   //    The anon key is meant to be public; the access rules in supabase/setup.sql protect the data.
-  supabaseUrl: "https://YOUR-PROJECT-REF.supabase.co",
-  supabaseAnonKey: "YOUR-ANON-PUBLIC-KEY",
+  supabaseUrl: "https://wdygnwspxvagrgtbllrf.supabase.co",
+  supabaseAnonKey: "sb_publishable_RcP_bdSxU2sQblc8AUN8UQ_jG-5c2nIY",
 
   site: {
     name: "Mapping MX Mems",
